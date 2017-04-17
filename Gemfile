@@ -16,10 +16,6 @@ gem 'haml-rails', '>= 0.9.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -32,7 +28,10 @@ gem 'devise', '~> 4.2.1'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'rails-assets-tether', '>= 1.1.0'
 gem 'sprockets-rails', '>= 2.3.2'
-gem 'browserify-rails'
+
+group :production do
+  gem 'browserify-rails'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

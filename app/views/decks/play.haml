@@ -2,7 +2,7 @@
 %h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size}}= @deck.name
 
 .row
-  = render partial: 'cards/card_actions', collection: @deck.cards, as: :card
+  = render partial: 'cards/card_actions', collection: @deck.cards.readied, as: :card
 %br
 
 %button.btn.btn-primary#deal Deal

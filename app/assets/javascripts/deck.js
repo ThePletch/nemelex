@@ -67,10 +67,15 @@ class Card {
     this.cardObject = this.jq.find(".card");
     this.discardedMarker = this.jq.find(".discarded");
     this.discardButton = this.jq.find(".discard");
+    this.description = this.jq.find(".card-text");
 
     this.discardButton.click(_ => {
       console.log(window.deck);
       window.deck.discard(this);
+    });
+    this.description.slideUp(0);
+    this.jq.find(".card-title").click(_ => {
+      this.description.slideToggle();
     });
   }
 
@@ -93,6 +98,7 @@ class Card {
   }
 }
 
+console.log("YES");
 $(".decks-play").ready(function() {
   console.log(this);
   let cards = [];
