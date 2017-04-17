@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Decks
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th
+  %tbody
+    - @decks.each do |deck|
+      %tr
+        %td= deck.name
+        %td
+          .btn-group
+            = link_to 'Show', deck, class: "btn btn-primary"
+            = link_to 'Edit', edit_deck_path(deck), class: "btn btn-secondary"
+            = link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+%br/
+= link_to 'New Deck', new_deck_path

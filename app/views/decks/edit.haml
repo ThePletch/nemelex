@@ -1,0 +1,6 @@
+%h1 Editing Deck
+= render 'form', deck: @deck
+= link_to 'Show', @deck
+- if user_signed_in?
+  |
+  = link_to 'Back', decks_path

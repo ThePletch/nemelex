@@ -1,0 +1,21 @@
+= form_for(deck) do |f|
+  - if deck.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(deck.errors.count, "error")
+        prohibited this deck from being saved:
+      %ul
+        - deck.errors.full_messages.each do |message|
+          %li= message
+  = f.hidden_field :user_id, value: current_user.id
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :initial_hand_size
+    = f.number_field :initial_hand_size
+  .row
+    = f.fields_for(:cards) do |c|
+      = render partial: 'cards/card_edit', locals: {form: c, card: c.object}
+  .actions
+    = f.submit

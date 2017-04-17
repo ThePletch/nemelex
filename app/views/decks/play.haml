@@ -1,0 +1,11 @@
+%p#notice= notice
+%h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size}}= @deck.name
+
+.row
+  = render partial: 'cards/card_actions', collection: @deck.cards, as: :card
+%br
+
+%button.btn.btn-primary#deal Deal
+%button.btn#draw Draw
+%br
+= link_to 'Back', deck_path(@deck)

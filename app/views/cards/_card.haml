@@ -1,0 +1,11 @@
+.col-sm-4.card-wrapper{id: "card-#{card.id}"}
+  .card{data: {id: card.id}}
+    .card-block
+      %h4.card-title.text-center= card.name
+      .card-text.freeform= card.description
+    - if card.readied
+      .card-footer.card-success.text-center
+        %span Readied
+    - else
+      .card-footer.text-center
+        %span Not readied

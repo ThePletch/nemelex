@@ -1,0 +1,8 @@
+.col-sm-4.card-wrapper{id: "card-#{card.id}"}
+  .card{data: {id: card.id}}
+    .card-block
+      %h4.card-title.text-center= card.name
+      .card-text.freeform= card.description
+    .card-footer
+      %button.btn.btn-primary.discard Discard
+      %button.btn.btn-secondary.disabled.discarded Discarded
