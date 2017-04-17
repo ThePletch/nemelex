@@ -2,7 +2,7 @@
 %h1= @deck.name
 
 .row
-  = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc)
+  = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc, name: :asc)
 %br/
 = link_to 'Play', play_deck_path(@deck)
 |
