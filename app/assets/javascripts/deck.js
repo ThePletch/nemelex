@@ -12,14 +12,10 @@ class Deck {
   }
 
   deal() {
-    console.log("DEAL");
     this.reshuffle();
-    console.log(this.deck);
-    console.log(this.hand);
     for (var i = 0; i < this.initialHandSize; i++) {
       this.draw();
     }
-    console.log(this.hand);
 
     this.render();
   }
@@ -49,6 +45,14 @@ class Deck {
     this.render();
   }
 
+  restore(card) {
+    let cardIndex = this.discardPile.indexOf(card);
+    this.hand = this.hand.concat(this.discardPile.splice(cardIndex, 1));
+
+    this.render();
+
+  }
+
   render() {
     this.deck.map(x => { x.renderInDeck(); });
 
@@ -65,14 +69,17 @@ class Card {
     // any color changes need to be applied to the card object, hence it being
     // tracked separately
     this.cardObject = this.jq.find(".card");
-    this.discardedMarker = this.jq.find(".discarded");
+    this.restoreButton = this.jq.find(".restore");
     this.discardButton = this.jq.find(".discard");
     this.description = this.jq.find(".card-text");
 
     this.discardButton.click(_ => {
-      console.log(window.deck);
-      window.deck.discard(this);
+      deck.discard(this);
     });
+    this.restoreButton.click(_ => {
+      deck.restore(this);
+    })
+
     this.description.slideUp(0);
     this.jq.find(".card-title").click(_ => {
       this.description.slideToggle();
@@ -80,8 +87,8 @@ class Card {
   }
 
   renderInHand() {
-    this.cardObject.removeClass('card-inverse card-warning');
-    this.discardedMarker.hide();
+    this.cardObject.removeClass('card-inverse card-dark');
+    this.restoreButton.hide();
     this.discardButton.show();
     this.jq.show();
   }
@@ -91,16 +98,14 @@ class Card {
   }
 
   renderDiscarded() {
-    this.cardObject.addClass('card-inverse card-warning');
-    this.discardedMarker.show();
+    this.cardObject.addClass('card-inverse card-dark');
+    this.restoreButton.show();
     this.discardButton.hide();
     this.jq.show();
   }
 }
 
-console.log("YES");
 $(".decks-play").ready(function() {
-  console.log(this);
   let cards = [];
   $(".card").each((n, c) => { cards.push(new Card($(c).data("id"))); });
 
