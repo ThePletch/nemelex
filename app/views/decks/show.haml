@@ -2,12 +2,13 @@
 %h1= @deck.name
 
 .row
-  = render partial: 'cards/card', collection: @deck.cards
+  = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc)
 %br/
 = link_to 'Play', play_deck_path(@deck)
 |
-= link_to 'New Card', new_deck_card_path(@deck)
-|
-= link_to 'Edit', edit_deck_path(@deck)
-|
+- if user_signed_in?
+  = link_to 'New Card', new_deck_card_path(@deck)
+  |
+  = link_to 'Edit', edit_deck_path(@deck)
+  |
 = link_to 'Back', decks_path
