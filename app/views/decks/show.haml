@@ -1,11 +1,10 @@
 %p#notice= notice
 %h1= @deck.name
+= link_to 'Play', play_deck_path(@deck), class: "btn btn-primary"
 
 .row
   = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc, name: :asc)
 %br/
-= link_to 'Play', play_deck_path(@deck)
-|
 - if user_signed_in?
   = link_to 'New Card', new_deck_card_path(@deck)
   |
