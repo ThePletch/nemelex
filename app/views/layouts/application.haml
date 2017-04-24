@@ -7,5 +7,12 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{class: "#{controller_name} #{controller_name}-#{action_name}"}
+    .btn-group.float-right.m-2
+      - if user_signed_in?
+        = link_to "Decks", decks_path, class: 'btn btn-primary'
+        = link_to "Sign out", destroy_user_session_path, class: 'btn btn-secondary', method: :delete
+      - elsif !current_page?(new_user_session_path)
+        = link_to "Sign in", new_user_session_path, class: 'btn btn-primary'
+    .clearfix
     .container
       = yield
