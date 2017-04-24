@@ -1,6 +1,7 @@
 class DecksController < ApplicationController
   before_action :set_deck, only: [:show, :edit, :update, :destroy, :play]
   before_action :authenticate_user!, except: [:show, :play]
+  before_action :ensure_owned!, only: [:edit, :update, :destroy]
 
   # GET /decks
   # GET /decks.json
@@ -69,6 +70,14 @@ class DecksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_deck
       @deck = Deck.find(params[:id])
+    end
+
+    def ensure_owned!
+      unless Deck.find(params[:id]).user == current_user
+        redirect_to decks_path, alert: 'You can only modify decks you own.'
+
+        return false
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
