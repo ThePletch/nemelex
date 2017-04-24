@@ -81,7 +81,7 @@ class Card {
     })
 
     this.description.slideUp(0);
-    this.jq.find(".card-title").hover(_ => {
+    this.cardObject.hover(_ => {
       this.description.slideDown();
     }, _ => {
       this.description.slideUp();
