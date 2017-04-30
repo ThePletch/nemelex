@@ -73,7 +73,15 @@ class DecksController < ApplicationController
     end
 
     def ensure_owned!
-      unless Deck.find(params[:id]).user == current_user
+      deck_owned = Deck.find(params[:id]).user == current_user
+      deck_card_ids = Card.where(deck_id: params[:id]).pluck(:id)
+      # ensure that all cards submitted are part of the specified deck
+      card_attributes_passed = params.dig(:deck, :cards_attributes)
+      all_cards_in_deck = card_attributes_passed.nil? || card_attributes_passed.reject do |_, attrs|
+        attrs[:id].nil? || deck_card_ids.include?(attrs[:id].to_i)
+      end.empty?
+
+      unless deck_owned && all_cards_in_deck
         redirect_to decks_path, alert: 'You can only modify decks you own.'
 
         return false
@@ -82,6 +90,6 @@ class DecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deck_params
-      params.require(:deck).permit(:name, :description, :user_id, :initial_hand_size, cards_attributes: [:id, :name, :description, :readied, :_destroy])
+      params.require(:deck).permit(:name, :description, :user_id, :initial_hand_size, :type, cards_attributes: [:id, :name, :description, :readied, :_destroy])
     end
 end

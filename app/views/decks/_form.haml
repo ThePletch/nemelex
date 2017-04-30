@@ -1,4 +1,4 @@
-= form_for(deck) do |f|
+= form_for(deck, as: :deck) do |f|
   - if deck.errors.any?
     #error_explanation
       %h2
@@ -8,14 +8,23 @@
         - deck.errors.full_messages.each do |message|
           %li= message
   = f.hidden_field :user_id, value: current_user.id
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :initial_hand_size
-    = f.number_field :initial_hand_size
-  .row
+  .form-group.row
+    = f.label :name, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+  .form-group.row
+    = f.label :initial_hand_size, class: 'col-sm-2 col-form-label'
+    .col-sm-1
+      = f.number_field :initial_hand_size, class: 'form-control'
+    .col-sm-9
+    %small.form-text.text-muted#no-deck-tooltip The selected deck type puts all cards in your hand automatically.
+  .form-group
+    = f.label :type
+    = f.select :type, Deck.types, {selected: deck.type || 'River', class: 'form-control'}
+    #deck-type-description
+  .row#cards-list
     = f.fields_for(:cards) do |c|
-      = render partial: 'cards/card_edit', locals: {form: c, card: c.object}
+      = render partial: 'cards/card_edit', locals: {f: c, card: c.object}
   .actions
-    = f.submit
+    = f.submit(f.object.new_record? ? "Create Deck" : "Update Deck", class: 'btn btn-primary')
+    = link_to_add_fields 'Add a Card', f, :cards, {partial: 'cards/card_edit', locals: {card: Card.new(deck: f.object)}}, class: 'btn btn-success'

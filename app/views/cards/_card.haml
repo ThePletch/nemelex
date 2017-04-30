@@ -3,9 +3,10 @@
     .card-block
       %h4.card-title.text-center= card.name
       .card-text.freeform= card.description
-    - if card.readied
-      .card-footer.card-success.text-center
-        %span Readied
-    - else
-      .card-footer.text-center
-        %span Not readied
+    - if card.readyable?
+      - if card.readied
+        .card-footer.card-success.text-center
+          %span Readied
+      - else
+        .card-footer.text-center
+          %span Not readied

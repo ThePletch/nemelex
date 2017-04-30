@@ -1,13 +1,13 @@
 %p#notice= notice
-%h1= @deck.name
+%h1
+  = @deck.name
+  %small.text-muted= @deck.type
 = link_to 'Play', play_deck_path(@deck), class: "btn btn-primary"
 
 .row
   = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc, name: :asc)
 %br/
 - if user_signed_in?
-  = link_to 'New Card', new_deck_card_path(@deck)
-  |
   = link_to 'Edit', edit_deck_path(@deck)
   |
 = link_to 'Back', decks_path
