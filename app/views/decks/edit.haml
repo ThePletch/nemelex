@@ -1,4 +1,4 @@
 %h1 Editing Deck
 = render 'form', deck: @deck
-= link_to 'Show', @deck
+= link_to 'Show', deck_path(@deck)
 = link_to 'Back', decks_path

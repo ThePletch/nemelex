@@ -83,8 +83,6 @@ class Card {
     this.description.slideUp(0);
     this.cardObject.hover(_ => {
       this.description.slideDown();
-    }, _ => {
-      this.description.slideUp();
     });
   }
 
@@ -112,6 +110,12 @@ $(".decks-play").ready(function() {
   $(".card").each((n, c) => { cards.push(new Card($(c).data("id"))); });
 
   window.deck = new Deck(cards, $("#deck").data("initial-hand-size"));
+
+  $("#cards").mouseleave(_ => {
+      cards.forEach(function(c) {
+        c.description.slideUp();
+      });
+    })
 
   $("#deal").click(_ => {
     deck.deal();

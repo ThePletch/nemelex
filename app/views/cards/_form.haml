@@ -1,4 +1,4 @@
-= form_for([@deck, card]) do |f|
+= form_for([@deck.becomes(Deck), card]) do |f|
   - if card.errors.any?
     #error_explanation
       %h2
@@ -8,11 +8,18 @@
         - card.errors.full_messages.each do |message|
           %li= message
   = f.hidden_field :deck_id, value: params[:deck_id]
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
+  .form-group.row
+    = f.label :name, class: 'col-md-1 col-form-label'
+    .col-md-11
+      = f.text_field :name, class: 'form-control'
+  - if card.readyable?
+    .form-group.row
+      = f.label :readied, class: 'col-md-1'
+      .col-md-11
+        = f.check_box :readied
+  .form-group
     = f.label :description
-    = f.text_area :description
+    = f.text_area :description, class: 'form-control'
+  .form-group
   .actions
     = f.submit

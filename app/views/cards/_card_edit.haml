@@ -1,14 +1,15 @@
-.col-sm-4.card-wrapper{id: "card-#{card.id}"}
+.col-lg-4.card-wrapper{id: "card-#{card.id}"}
   .card.text-center{data: {id: card.id}}
     .card-block
       %h4.card-title
-        = form.text_field :name
+        = f.text_field :name, placeholder: card.new_record? ? "New card" : "Name"
       .card-text
-        = form.text_area :description, cols: 35, rows: 10
+        = f.text_area :description, cols: 35, rows: 10
     .card-footer
-      = form.hidden_field :id, value: card.id
-      = form.check_box :readied
-      = form.label :readied
-      %br
-      = form.check_box :_destroy
-      = form.label :_destroy, "Delete"
+      = f.hidden_field :id, value: card.id unless card.new_record?
+      .readyable-toggle.form-check.form-check-inline
+        = f.check_box :readied
+        = f.label :readied
+      .form-check.form-check-inline
+        = f.check_box :_destroy
+        = f.label :_destroy, "Delete"

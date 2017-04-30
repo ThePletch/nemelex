@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :decks, shallow: true do
-    resources :cards, except: [:index, :show]
     member do
       get "play"
     end
