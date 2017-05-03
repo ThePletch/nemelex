@@ -1,13 +1,13 @@
-%p#notice= notice
 %h1
   = @deck.name
   %small.text-muted= @deck.type
-= link_to 'Play', play_deck_path(@deck), class: "btn btn-primary"
+.m-lg-3.m-sm-2
+  = link_to 'Play', play_deck_path(@deck), class: "btn btn-primary"
+  - if user_signed_in? && @deck.user == current_user
+    = link_to 'Edit', edit_deck_path(@deck), class: "btn btn-warning"
+  = link_to 'Back', decks_path, class: "btn btn-secondary"
+  = link_to 'Delete', deck_path(@deck), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger float-right"
 
 .row
   = render partial: 'cards/card', collection: @deck.cards.order(readied: :desc, name: :asc)
 %br/
-- if user_signed_in?
-  = link_to 'Edit', edit_deck_path(@deck)
-  |
-= link_to 'Back', decks_path

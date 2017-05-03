@@ -27,4 +27,6 @@
       = render partial: 'cards/card_edit', locals: {f: c, card: c.object}
   .actions
     = f.submit(f.object.new_record? ? "Create Deck" : "Update Deck", class: 'btn btn-primary')
-    = link_to_add_fields 'Add a Card', f, :cards, {partial: 'cards/card_edit', locals: {card: Card.new(deck: f.object)}}, class: 'btn btn-success'
+    - unless deck.new_record?
+      = link_to_add_fields 'Add a Card', f, :cards, {partial: 'cards/card_edit', locals: {card: Card.new(deck: f.object)}}, class: 'btn btn-success'
+    = link_to "Back", deck.new_record? ? decks_path : deck_path(deck), class: 'btn btn-secondary'
