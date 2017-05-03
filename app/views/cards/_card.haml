@@ -1,4 +1,4 @@
-.col-sm-4.card-wrapper{id: "card-#{card.id}"}
+.col-lg-4.col-sm-6.card-wrapper{id: "card-#{card.id}"}
   .card{data: {id: card.id}}
     .card-block
       %h4.card-title.text-center= card.name
@@ -10,3 +10,6 @@
       - else
         .card-footer.text-center
           %span Not readied
+    - else
+      .card-footer.text-center
+        %span.hidden-md-down &nbsp;
