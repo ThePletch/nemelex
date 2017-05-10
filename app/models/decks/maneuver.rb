@@ -5,10 +5,6 @@ class Maneuver < Deck
     Deck.model_name
   end
 
-  def number_readied
-    cards.readied.count
-  end
-
   def readied_cards
     cards.readied
   end
