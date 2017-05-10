@@ -58,15 +58,7 @@ class DecksController < ApplicationController
     end
 
     def ensure_owned!
-      deck_owned = Deck.find(params[:id]).user == current_user
-      deck_card_ids = Card.where(deck_id: params[:id]).pluck(:id)
-      # ensure that all cards submitted are part of the specified deck
-      card_attributes_passed = params.dig(:deck, :cards_attributes)
-      all_cards_in_deck = card_attributes_passed.nil? || card_attributes_passed.reject do |_, attrs|
-        attrs[:id].nil? || deck_card_ids.include?(attrs[:id].to_i)
-      end.empty?
-
-      unless deck_owned && all_cards_in_deck
+      unless Deck.find(params[:id]).user == current_user
         redirect_to decks_path, alert: 'You can only modify decks you own.'
 
         return false

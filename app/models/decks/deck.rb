@@ -9,6 +9,7 @@ class Deck < ApplicationRecord
     end]
   end
 
+  # TODO: Code cleanup location
   %w(readyable? uses_deck?).each do |instance_delegate|
     define_method(instance_delegate) do
       self.class.public_send(instance_delegate)
@@ -22,7 +23,7 @@ class Deck < ApplicationRecord
 
   # returns number of readied cards, should really be factored out
   def number_readied
-    cards.count
+    readied_cards.count
   end
 
   # returns all cards marked as readied
