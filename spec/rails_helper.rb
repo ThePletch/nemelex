@@ -8,6 +8,16 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 
 require 'rspec/rails'
 require 'rspec/core/formatters'
+require 'capybara/rails'
+require 'capybara/rspec'
+require "capybara/dsl"
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: true, phantomjs_options: ['--load-images=no'], timeout: 120, window_size: [1280, 2000])
+end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
