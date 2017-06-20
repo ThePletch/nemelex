@@ -1,24 +1,16 @@
 class DeckForm {
   constructor() {
-    this.descriptionField = $('#deck-type-description');
     this.handSizeField = $("#deck_initial_hand_size");
     this.handTooltip = $("#no-deck-tooltip");
-    this.deckTypeSelector = $("#deck_type");
+    this.usesDeckCheckbox = $("#uses_deck");
+    this.readyableCheckbox = $("#readyable");
     this.cardsList = $("#cards-list");
   }
 
-  selectedDeckType() {
-    return this.deckTypeSelector.find(':selected');
-  }
-
-  switchDeckTypeDescription() {
-    this.descriptionField.html(this.selectedDeckType().attr('description'));
-  }
-
   toggleHandSizeField() {
-    const typeUsesDeck = this.selectedDeckType().attr('uses_deck') == "true"
-    this.handSizeField.prop('disabled', !typeUsesDeck);
-    if (typeUsesDeck) {
+    const usesDeck = this.usesDeckCheckbox.is(':checked');
+    this.handSizeField.prop('disabled', !usesDeck);
+    if (usesDeck) {
       this.handTooltip.hide();
     } else {
       this.handTooltip.show();
@@ -26,8 +18,8 @@ class DeckForm {
   }
 
   toggleReadyableCheckboxes() {
-    const typeIsReadyable = this.selectedDeckType().attr('readyable') == "true"
-    if (typeIsReadyable) {
+    const isReadyable = this.readyableCheckbox.is(':checked');
+    if (isReadyable) {
       $(".readyable-toggle").show();
     } else {
       $(".readyable-toggle").hide();
@@ -35,7 +27,6 @@ class DeckForm {
   }
 
   updateDeckInfo() {
-    this.switchDeckTypeDescription();
     this.toggleHandSizeField();
     this.toggleReadyableCheckboxes();
   }
@@ -44,7 +35,8 @@ class DeckForm {
 $(".decks-new,.decks-edit").ready(function() {
   const deckForm = new DeckForm();
 
-  $("#deck_type").change(deckForm.updateDeckInfo.bind(deckForm));
+  $("#uses_deck").change(deckForm.toggleHandSizeField.bind(deckForm));
+  $("#readyable").change(deckForm.toggleReadyableCheckboxes.bind(deckForm));
   deckForm.updateDeckInfo();
 
   $('[data-form-prepend]').click(function(e) {

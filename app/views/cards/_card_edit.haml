@@ -8,8 +8,11 @@
     .card-footer
       = f.hidden_field :id, value: card.id unless card.new_record?
       .readyable-toggle.form-check.form-check-inline
-        = f.check_box :readied
+        = f.check_box :readied, class: 'card-readyable-checkbox'
         = f.label :readied
+      .form-check.form-check-inline
+        = f.check_box :always_draw, class: 'card-always-draw-checkbox'
+        = f.label :always_draw, tooltip: "YES"
       .form-check.form-check-inline
         = f.check_box :_destroy
         = f.label :_destroy, "Delete"

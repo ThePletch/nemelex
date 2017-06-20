@@ -28,6 +28,7 @@ gem 'devise', '~> 4.2.1'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'rails-assets-tether', '>= 1.1.0'
 gem 'sprockets-rails', '>= 2.3.2'
+gem 'font-awesome-rails'
 
 group :production do
   gem 'browserify-rails'
@@ -43,6 +44,7 @@ group :test do
   gem 'factory_girl_rails', '>= 4.5.0'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do
