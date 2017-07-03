@@ -2,6 +2,8 @@
 FactoryGirl.define do
   factory :deck do
     sequence(:name) {|n| "Deck Name #{n}" }
+    initial_hand_size 1
+    uses_deck true
     user
 
     factory :hold_em_deck do
@@ -10,7 +12,7 @@ FactoryGirl.define do
 
     factory :river_deck
 
-    factory :maneuver_deck do
+    factory :readyable_deck do
       readyable true
     end
   end

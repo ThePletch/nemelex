@@ -13,12 +13,12 @@ require 'capybara/rspec'
 require "capybara/dsl"
 require 'capybara/poltergeist'
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 120, window_size: [1280, 2000])
+end
+
 Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = 3
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: true, phantomjs_options: ['--load-images=no'], timeout: 120, window_size: [1280, 2000])
-end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

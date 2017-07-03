@@ -13,6 +13,12 @@
   },
   "homepage": "https://github.com/ThePletch/nemelex#readme",
   "dependencies": {
-    "browserify": "14.3.0"
+    "browserify": "14.3.0",
+    "eslint-config-airbnb": "^15.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.1"
   }
 }

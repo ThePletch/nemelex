@@ -1,4 +1,4 @@
-%h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size}}
+%h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size, "uses_deck" => @deck.uses_deck.to_s, "readyable" => @deck.readyable.to_s}}
   = @deck.name
 
 .row#cards

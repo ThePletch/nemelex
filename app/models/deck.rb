@@ -12,7 +12,11 @@ class Deck < ApplicationRecord
 
   # returns all cards marked as readied
   def readied_cards
-    cards
+    if readyable?
+      cards.readied
+    else
+      cards
+    end
   end
 
   # true if the deck lets you ready cards
@@ -21,7 +25,7 @@ class Deck < ApplicationRecord
   end
 
   # true if the deck allows you to draw from a deck
-  def self.uses_deck?
+  def uses_deck?
     uses_deck
   end
 end

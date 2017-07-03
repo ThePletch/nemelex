@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Card do
   describe "#readyable?" do
     it "returns the readyability of its parent deck" do
-      readyable_deck = FactoryGirl.create(:maneuver_deck)
+      readyable_deck = FactoryGirl.create(:readyable_deck)
       readyable_card = FactoryGirl.create(:card, deck: readyable_deck)
 
       unreadyable_deck = FactoryGirl.create(:river_deck)
