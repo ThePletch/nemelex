@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
@@ -20,6 +21,12 @@
 
 .card {
   height: 100%;
+  &.ephemeral {
+    background-color: #dfd;
+    .card-footer {
+      background-color: #bdb;
+    }
+  }
 }
 
 .card-wrapper {

@@ -1,15 +1,18 @@
-.col-xl-4.col-md-6.card-wrapper{id: "card-#{card.id}"}
-  .card.text-center{data: {id: card.id}}
+.col-xl-4.col-md-6.card-wrapper{id: "card-#{card.id || "tmp"}"}
+  .card.text-center{data: {id: card.id }, class: ("ephemeral" if card.new_record?) }
     .card-block
       %h4.card-title
-        = f.text_field :name, placeholder: card.new_record? ? "New card" : "Name"
+        = f.text_field :name, class: 'card-name', placeholder: card.new_record? ? "New card" : "Name"
       .card-text
         = f.text_area :description, cols: 35, rows: 10
     .card-footer
       = f.hidden_field :id, value: card.id unless card.new_record?
-      .readyable-toggle.form-check.form-check-inline
-        = f.check_box :readied
+      .readied-toggle.form-check.form-check-inline
+        = f.check_box :readied, class: 'card-readied-checkbox'
         = f.label :readied
+      .always-draw-toggle.form-check.form-check-inline
+        = f.check_box :always_draw, class: 'card-always-draw-checkbox'
+        = f.label :always_draw
       .form-check.form-check-inline
-        = f.check_box :_destroy
+        = f.check_box :_destroy, class: 'card-delete-checkbox'
         = f.label :_destroy, "Delete"

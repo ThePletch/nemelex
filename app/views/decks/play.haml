@@ -1,6 +1,5 @@
-%h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size}}
+%h1#deck{data: {"initial-hand-size" => @deck.initial_hand_size, "uses_deck" => @deck.uses_deck.to_s, "readyable" => @deck.readyable.to_s}}
   = @deck.name
-  %small.text-muted= @deck.type
 
 .row#cards
   = render partial: 'cards/card_actions', collection: @deck.readied_cards.order(:name), as: :card

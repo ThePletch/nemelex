@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430142543) do
+ActiveRecord::Schema.define(version: 20170616205033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,19 +19,21 @@ ActiveRecord::Schema.define(version: 20170430142543) do
     t.string   "name"
     t.text     "description"
     t.integer  "deck_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "readied",     default: true
+    t.boolean  "always_draw", default: false
     t.index ["deck_id"], name: "index_cards_on_deck_id", using: :btree
   end
 
   create_table "decks", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "initial_hand_size"
-    t.string   "type",              null: false
+    t.boolean  "readyable",         default: false
+    t.boolean  "uses_deck",         default: true
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end
 

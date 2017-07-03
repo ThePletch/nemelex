@@ -1,5 +1,5 @@
 .col-lg-4.col-sm-6.card-wrapper{id: "card-#{card.id}"}
-  .card{data: {id: card.id}}
+  .card{data: {id: card.id, "always-draw" => card.always_draw.to_s }}
     .card-block
       %h4.card-title.text-center= card.name
       .card-text.freeform= card.description

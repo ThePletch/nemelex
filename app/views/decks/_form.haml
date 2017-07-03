@@ -17,16 +17,23 @@
     .col-sm-1
       = f.number_field :initial_hand_size, class: 'form-control'
     .col-sm-9
-    %small.form-text.text-muted#no-deck-tooltip The selected deck type puts all cards in your hand automatically.
+    %small.form-text.text-muted#no-deck-tooltip Unchecking 'Uses deck' puts all cards in your hand automatically.
   .form-group
-    = f.label :type
-    = f.select :type, Deck.types, {selected: deck.type || 'River', class: 'form-control'}
-    #deck-type-description
+    = f.check_box :uses_deck, id: "uses_deck"
+    = f.label :uses_deck, "Uses deck"
+    %sup
+      = fa_icon 'info-circle', title: 'If unchecked, all cards are put in your hand immediately.'
+  .form-group
+    = f.check_box :readyable, id: "readyable"
+    = f.label :readyable, "Only draw 'readied' cards"
+    %sup
+      = fa_icon 'info-circle', title: 'If checked, any cards not marked as "readied" will not appear in your deck when playing.'
+  .form-group
   .row#cards-list
     = f.fields_for(:cards) do |c|
       = render partial: 'cards/card_edit', locals: {f: c, card: c.object}
   .actions
     = f.submit(f.object.new_record? ? "Create Deck" : "Update Deck", class: 'btn btn-primary')
     - unless deck.new_record?
-      = link_to_add_fields 'Add a Card', f, :cards, {partial: 'cards/card_edit', locals: {card: Card.new(deck: f.object)}}, class: 'btn btn-success'
+      = link_to_add_fields 'Add a Card', f, :cards, {partial: 'cards/card_edit', locals: {card: Card.new(deck: f.object)}}, class: 'btn btn-success', id: "add-card"
     = link_to "Back", deck.new_record? ? decks_path : deck_path(deck), class: 'btn btn-secondary'

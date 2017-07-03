@@ -1,18 +1,19 @@
 # TODO verify how sti works with factorygirl
 FactoryGirl.define do
-  factory :deck, class: 'River' do
+  factory :deck do
     sequence(:name) {|n| "Deck Name #{n}" }
-    type 'River'
+    initial_hand_size 1
+    uses_deck true
     user
 
-    factory :hold_em_deck, class: 'HoldEm' do
-      type 'HoldEm'
+    factory :hold_em_deck do
+      uses_deck false
     end
 
     factory :river_deck
 
-    factory :maneuver_deck, class: 'Maneuver' do
-      type 'Maneuver'
+    factory :readyable_deck do
+      readyable true
     end
   end
 end
