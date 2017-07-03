@@ -3,7 +3,7 @@ class DropTypeColumn < ActiveRecord::Migration[5.0]
     Deck.all.each do |d|
       attributes = {}
 
-      case d.type
+      case d['type']
       when 'HoldEm'
         attributes = {readyable: false, uses_deck: false}
       when 'River'
