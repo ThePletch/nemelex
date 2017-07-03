@@ -1,10 +1,11 @@
+class Maneuver; end
+class River; end
+class HoldEm; end
 class DropTypeColumn < ActiveRecord::Migration[5.0]
   def change
     # [SJP] temp classes to shut up heroku
     # this would have been better to do with a bare sql query
-    class Maneuver; end;
-    class River; end;
-    class HoldEm; end;
+
     Deck.all.each do |d|
       attributes = {}
 
