@@ -4,7 +4,7 @@ module Presentable
 
   included do
     def presenter(options = {})
-      @presentable_presenter ||= "#{self.class}Presenter".constantize.new(self, options)
+      "#{self.class}Presenter".constantize.new(self, options)
     end
   end
 end
