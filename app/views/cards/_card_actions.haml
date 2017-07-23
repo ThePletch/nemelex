@@ -1,8 +1,7 @@
-.col-lg-4.col-sm-6.card-wrapper{id: "card-#{card.id}"}
-  .card{data: {id: card.id, "always-draw" => card.always_draw.to_s }}
-    .card-block
-      %h4.card-title.text-center= card.name
-      .card-text.freeform= card.description
-    .card-footer
-      %button.btn.btn-primary.discard Discard
-      %button.btn.btn-secondary.restore Restore
+- content_for :card_fields do
+  %h4.card-title.text-center= card.name
+  .card-text.freeform= card.description
+- content_for :card_footer do
+  %button.btn.btn-primary.discard Discard
+  %button.btn.btn-secondary.restore Restore
+= render template: 'cards/base_card', locals: { card: card }

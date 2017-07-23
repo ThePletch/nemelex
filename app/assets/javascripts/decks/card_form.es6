@@ -19,13 +19,19 @@ class CardForm {
     return this.readiedCheckbox.is(':checked') || !this.readiedCheckbox.is(':visible');
   }
 
+  // a card should be marked as 'readied' only if readied is toggleable and toggled on
+  displayReadied() {
+    return this.readiedCheckbox.is(':checked') && this.readiedCheckbox.is(':visible');
+  }
+
   // only allowed to mark a card as 'always draw' if you can draw it
   // i.e. it is readied
-  toggleAlwaysDraw() {
+  toggleReadyDependentFeatures() {
     this.alwaysDrawCheckbox.prop('disabled', !this.isReadied());
+    this.cardObject.find(".card-footer").toggleClass('card-success', this.displayReadied());
   }
 
   update() {
-    this.toggleAlwaysDraw();
+    this.toggleReadyDependentFeatures();
   }
 }
