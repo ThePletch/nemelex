@@ -22,7 +22,7 @@ class CardPresenter < Presenter
   end
 
   def name_placeholder
-    card.new_record? ? "New card" : "Name"
+    (card && card.new_record?) ? "New card" : "Name"
   end
 
   def data
