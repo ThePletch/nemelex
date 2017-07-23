@@ -1,5 +1,5 @@
 class Deck < ApplicationRecord
-  # TODO: Code cleanup location
+  include Presentable
   belongs_to :user
   has_many :cards, dependent: :destroy
 

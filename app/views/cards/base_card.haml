@@ -1,0 +1,6 @@
+.col-xl-4.col-sm-6.card-wrapper{id: "card-#{card.presenter.rendered_id}"}
+  .card.text-center{data: {id: card.presenter.rendered_id}.merge(card.presenter.data), class: card.presenter.classes.join(" ")}
+    .card-block
+      = yield_content! :card_fields
+    .card-footer{class: card.presenter.footer_classes.join(" ")}
+      = yield_content! :card_footer

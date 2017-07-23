@@ -4,7 +4,7 @@ class DeckForm {
     this.handTooltip = $("#no-deck-tooltip");
     this.usesDeckCheckbox = $("#uses_deck");
     this.readyableCheckbox = $("#readyable");
-    this.cardsList = $("#cards-list")
+    this.cardsList = $("#cards-list");
     this.cardObjects = this.cardsList.find(".card-wrapper").map(function(i, e){
       return new CardForm(e);
     }).toArray();

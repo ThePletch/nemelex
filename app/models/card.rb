@@ -1,4 +1,6 @@
 class Card < ApplicationRecord
+  include Presentable
+
   belongs_to :deck
 
   delegate :readyable?, to: :deck

@@ -1,15 +1,9 @@
-.col-lg-4.col-sm-6.card-wrapper{id: "card-#{card.id}"}
-  .card{data: {id: card.id}}
-    .card-block
-      %h4.card-title.text-center= card.name
-      .card-text.freeform= card.description
-    - if card.readyable?
-      - if card.readied
-        .card-footer.card-success.text-center
-          %span Readied
-      - else
-        .card-footer.text-center
-          %span Not readied
-    - else
-      .card-footer.text-center
-        %span.hidden-md-down &nbsp;
+- content_for :card_fields do
+  %h4.card-title.text-center= card.name
+  .card-text.freeform= card.description
+- content_for :card_footer do
+  - if card.readyable?
+    %span= card.presenter.readied_status
+  - else
+    %span.hidden-md-down &nbsp;
+= render template: 'cards/base_card', locals: { card: card }

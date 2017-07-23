@@ -14,7 +14,7 @@ require "capybara/dsl"
 require 'capybara/poltergeist'
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 120, window_size: [1280, 2000])
+  Capybara::Poltergeist::Driver.new(app, timeout: 120, window_size: [1280, 2000], js_errors: true)
 end
 
 Capybara.javascript_driver = :poltergeist
