@@ -18,7 +18,7 @@ class CardPresenter < Presenter
   end
 
   def rendered_id
-    card.id || "tmp"
+    card.try(:id) || "tmp"
   end
 
   def name_placeholder
